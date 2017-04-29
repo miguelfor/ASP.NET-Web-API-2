@@ -21,11 +21,10 @@ namespace BookingApi.Controllers
 
 
         private string urlDoctor = @"http://pruebas.apimedic.personalsoft.net:8082/api/v1/doctors/";
-        private string urlPatient = @" http://pruebas.apimedic.personalsoft.net:8082/api/v1/patients/";
+        private string urlPatient = @"http://pruebas.apimedic.personalsoft.net:8082/api/v1/patients/";
         private string validate;
 
-
-
+ 
         // GET: api/Appointments
         public IQueryable<Appointment> GetAppointments()
         {
@@ -169,6 +168,7 @@ namespace BookingApi.Controllers
                     var appointmentQueryFirst = appointmentQuery.First();
                     appFor.allNamePatient = NamePatient(appointmentQueryFirst.idPatient);
                     appFor.idAppointment = appointmentQueryFirst.id;
+                    appFor.idPatient = appointmentQueryFirst.idPatient;
                 }
             }
             return Ok(dates);
@@ -269,7 +269,7 @@ namespace BookingApi.Controllers
             var appointmentQueryCount = appointmentQuery.Count();
             if (appointmentQueryCount > 0)
             {
-                string urlPatientId = urlPatient + ResultIdPatient + "/?format=json";
+                string urlPatientId = "http://pruebas.apimedic.personalsoft.net:8082/api/v1/patients/"+ ResultIdPatient + "/?format=json";
                 using (var w = new WebClient())
                 {
                     var json_data = string.Empty;
